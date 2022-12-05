@@ -10,13 +10,21 @@ abstract class Abstract_Enemy {
         hero_ref = ref;
     }
 
-    void AI_action()
+    public void AI_action()
     {
         attack();
         move();
     }
     abstract void move();
     abstract void attack();
+
+    public Integer getX() {
+        return x;
+    }
+
+    public Integer getY() {
+        return y;
+    }
 }
 
 class Enemy_trooper extends Abstract_Enemy {
@@ -112,7 +120,7 @@ class Enemy_archer extends Abstract_Enemy{
         {
             hero_ref.get_damage(damage_melee);
         }
-        else if ((distToHero) >= attack_range_nearest)
+        else if ((distToHero) >= attack_range_farthest)
         {
             hero_ref.get_damage(damage_distant);
         }
@@ -128,7 +136,7 @@ class Enemy_mage extends Abstract_Enemy{
     Enemy_mage(int _x, int _y, Hero ref)
     {
         super( _x, _y, ref);
-        damage_distant = 15;
+        damage_distant = 35;
         kill_number = 5;
     }
     @Override
@@ -140,7 +148,7 @@ class Enemy_mage extends Abstract_Enemy{
     @Override
     void attack()
     {
-        if ((hero_ref.getX() % 10 + hero_ref.getY() % 10 <= kill_number - 1) && (hero_ref.getX() % 10 + hero_ref.getY() % 10 <= kill_number + 1))
+        if ((hero_ref.getX() % 10 + hero_ref.getY() % 10 >= kill_number - 1) && (hero_ref.getX() % 10 + hero_ref.getY() % 10 <= kill_number + 1))
         {
             hero_ref.get_damage(damage_distant);
             kill_number = (int)(Math.random()* 7) % 7 + 1;

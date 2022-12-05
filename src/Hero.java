@@ -4,11 +4,11 @@ class Hero {
     private Integer health;
     private boolean dead;
 
-    Hero(int _x, int _y, Integer heal)
+    Hero(int _x, int _y, Integer _health)
     {
         x = _x;
         y = _y;
-        health = heal;
+        health = _health;
         dead = false;
     }
 
@@ -36,5 +36,9 @@ class Hero {
     public boolean isDead()
     {
         return dead;
+    }
+
+    public Integer getHealth() {
+        return health;
     }
 }
